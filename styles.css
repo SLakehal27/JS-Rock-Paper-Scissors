@@ -57,5 +57,6 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 32px;
+    gap:32px;
     /* padding-bottom: 40px; */
 }

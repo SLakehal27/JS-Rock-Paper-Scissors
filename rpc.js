@@ -1,4 +1,4 @@
-//Setup; Ideally, remove global variables
+//Setup. Ideally, remove global variables.
 
 let turnCount = 0;
 const turnTxt = document.querySelector(".rpctxt p");
@@ -89,6 +89,7 @@ function playMove(move)
         turnCount = 0;
         playerWins = 0;
         computerWins = 0;
+        turnTxt.textContent = "Turn " + turnCount;
         return;
     }
 
