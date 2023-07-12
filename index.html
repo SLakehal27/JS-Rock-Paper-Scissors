@@ -3,8 +3,28 @@
     <head>
         <meta charset="utf-8">
         <title>Rock-Paper-Scissors</title>
+        <script src = "rpc.js" defer></script>
+        <link rel = "stylesheet" href = "styles.css">
     </head>
     <body>
-        <script src = "rpc.js"></script>
+        <div class = "headerbox">
+            <div class = "headertitle"> Rock-Paper-Scissors</div>
+        </div>
+
+        <div class = "rpctxt">
+            <p>Turn 1</p>
+        </div>
+
+        <div class = "rpcbox">
+            <button class = "rpcbutton" onclick="playMove('rock')">✊</button>
+            <button class = "rpcbutton" onclick="playMove('paper')">🤚</button>
+            <button class = "rpcbutton" onclick="playMove('scissors')">✌</button>
+        </div>
+        <div class = "rpcrestxt">
+            <p> Win or Lose?</p>
+        </div>
+        <div class = "rpcfooter">
+            <p> Copyright</p>
+        </div>
     </body>
 </html>

@@ -1,38 +1,46 @@
-function getComputerChoice() {
+//Setup; Ideally, remove global variables
+
+let turnCount = 0;
+const turnTxt = document.querySelector(".rpctxt p");
+turnTxt.textContent = "Turn " + turnCount;
+let playerWins = 0;
+let computerWins = 0;
+
+function getComputerChoice() 
+{
     const states = ["Rock", "Paper", "Scissors"];
     const randomIndex = parseInt(Math.random() * 3);
     return states[randomIndex];
-  }
+}
   
-  function determineWinner(moveA,moveB)
-  {
-  
-      if(moveA.toUpperCase() == "ROCK" && moveB == "Paper"){
+function determineWinner(moveA,moveB)
+{
+    if(moveA.toUpperCase() == "ROCK" && moveB == "Paper"){
         return false;
     }
     else if(moveA.toUpperCase() == "PAPER" && moveB == "Rock")
     {
-        return true;
+       return true;
     }
-    
+
     if(moveA.toUpperCase() == "SCISSORS" && moveB == "Paper"){
         return true;
     }
     else if(moveA.toUpperCase() == "PAPER" && moveB == "Scissors")
     {
         return false;
-    }
-    
-    
+    }  
+  
     if(moveA.toUpperCase() == "SCISSORS" && moveB == "Rock"){
         return false;
     }
     else if(moveA.toUpperCase() == "ROCK" && moveB == "Scissors"){
         return true;
     }
-  }
-  
-  function fixName(playerChoice){
+}
+
+function fixName(playerChoice)
+{
     if(playerChoice.toUpperCase() == "ROCK"){
         return 0;
     }
@@ -41,72 +49,51 @@ function getComputerChoice() {
     }
     else
         return 2;
-  }
-  
-  function playRound(playerChoice,computerChoice)
-  {
+}
+
+function playRound(playerChoice,computerChoice)
+{
     const condition = ["win", "lose"];
     const gameStates = ["Rock", "Paper", "Scissors"];
-      if(playerChoice.toUpperCase() == computerChoice.toUpperCase())
+    if(playerChoice.toUpperCase() == computerChoice.toUpperCase())
     {
         return "Stalemate!";
     }
     else
     {
         if(determineWinner(playerChoice,computerChoice))
-      {
-          playerChoice = gameStates[fixName(playerChoice)]
-          return "You win! " + playerChoice + " beats " + computerChoice;
-      }
-      else{
-          playerChoice = gameStates[fixName(playerChoice)]
-          return "You lose! " + computerChoice + " beats " + playerChoice;
-      }
-    }
-  }
-  
-  function gameLoop(){
-    let numberOfGames = 1;
-    let playerWins = 0;
-    let enemyWins = 0;
-    let isRock = false;
-    let isPaper = false; 
-    let isScissors = false;
-    let isNotStalemate = false; 
-    let isWinner = false;
-
-    while (numberOfGames < 6)
-    {
-        let computerChoice = getComputerChoice();
-        const playerMove = prompt("Your Move!");
-        isRock = playerMove.toUpperCase() != "ROCK"; 
-        isPaper = playerMove.toUpperCase() != "PAPER"; 
-        isScissors = playerMove.toUpperCase() != "SCISSORS";
-        console.log(numberOfGames);
-        if( (isPaper && isRock && isScissors) || playerMove == null)
         {
-            continue;
+            playerChoice = gameStates[fixName(playerChoice)];
+            playerWins++;
+            return "You win! " + playerChoice + " beats " + computerChoice;
         }
         else
         {
-            isNotStalemate = playerMove.toUpperCase() != computerChoice.toUpperCase;
-            isWinner = determineWinner(playerMove,computerChoice);
-
-            if(isWinner && isNotStalemate) {
-                playerWins++;
-            }
-            else if(isWinner == false && isNotStalemate)
-            {
-                enemyWins++;
-            }
-            console.log(playRound(playerMove,computerChoice));
-            numberOfGames++;
+            playerChoice = gameStates[fixName(playerChoice)];
+            computerWins++;
+            return "You lose! " + computerChoice + " beats " + playerChoice;
         }
     }
+}
 
-    console.log("You won " + playerWins + " times and lost " + enemyWins + " times");
-  }
-  
-  gameLoop();
-  
-  
+
+function playMove(move)
+{
+    const computerChoice = getComputerChoice();
+    const result = playRound(move,computerChoice);
+    const rpctxt = document.querySelector(".rpcrestxt p");
+
+    if(turnCount >= 5)
+    {
+        rpctxt.textContent = "You won " + playerWins + " times and lost " + computerWins + " times";
+        turnCount = 0;
+        playerWins = 0;
+        computerWins = 0;
+        return;
+    }
+
+    rpctxt.textContent = result;
+    turnCount++;
+    turnTxt.textContent = "Turn " + turnCount;
+}
+
