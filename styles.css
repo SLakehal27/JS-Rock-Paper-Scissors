@@ -58,5 +58,7 @@ body{
     align-items: center;
     font-size: 32px;
     gap:32px;
-    /* padding-bottom: 40px; */
+    position:absolute;
+    bottom:0;
+    width: 100vw;
 }
